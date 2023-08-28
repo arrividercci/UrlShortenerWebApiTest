@@ -11,6 +11,7 @@ namespace Shared.DataTransferObjects
         public int Id { get; set; }
         public string? OriginalUrl { get; set; }
         public string? ShorterUrl { get; set; }
+        public string? UserId { get; set; }
         public DateTime CreationDate { get; set; }
     }
 }

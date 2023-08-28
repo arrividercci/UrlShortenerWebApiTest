@@ -9,7 +9,7 @@ namespace Service.Contract
 {
     public interface IUrlService
     {
-        Task<IEnumerable<UrlDto>> GetAllUrlAsync(bool trackChanges)
+        Task<IEnumerable<UrlDto>> GetAllUrlAsync(bool trackChanges);
         Task<UrlDto> GetUrlAsync(int urlId, bool trackChanges);
         Task<UrlDto> GetUrlByCodeAsync(string urlCode, bool trackChanges);
         Task<IEnumerable<UrlDto>> GetUrlsAsync(string userId, bool trackChanges);

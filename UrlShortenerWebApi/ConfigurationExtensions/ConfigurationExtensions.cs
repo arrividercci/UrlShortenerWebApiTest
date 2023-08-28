@@ -19,6 +19,19 @@ namespace UrlShortenerWebApi.ConfigurationExtensions
             .UseSqlServer(configuration.GetConnectionString("UrlShortenerConnectionString")));
         }
 
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+        }
+
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IUrlCodeGenerator, UrlCodeGenerator>();

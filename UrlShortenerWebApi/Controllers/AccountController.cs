@@ -16,7 +16,7 @@ namespace UrlShortenerWebApi.Controllers
             this.serviceManager = serviceManager;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegisterUserModel user)
         {
             await serviceManager.UserService.Register(user);
@@ -24,7 +24,7 @@ namespace UrlShortenerWebApi.Controllers
             return Accepted();
         }
 
-        [HttpGet]
+        [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginUserModel user)
         {
                 var userDto = await serviceManager.UserService.Login(user);

@@ -21,7 +21,6 @@ namespace UrlShortenerWebApi.Controllers
 
         [HttpGet("all")]
         [Authorize(Roles = RolesString.User)]
-        [Authorize(Roles = RolesString.Admin)]
         public async Task<IActionResult> GetAllUrlsAsync()
         {
             var urls = await serviceManager.UrlService.GetAllUrlAsync(false);
@@ -39,8 +38,8 @@ namespace UrlShortenerWebApi.Controllers
         [Authorize(Roles = RolesString.Admin)]
         public async Task<IActionResult> GetUrlsByUserIdAsync()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
             var urls = await serviceManager.UrlService.GetUrlsAsync(userId, false);
 
             if (urls is null)
@@ -60,7 +59,7 @@ namespace UrlShortenerWebApi.Controllers
                 return BadRequest("UrlForCreationDto object is null");
             }
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
             var urlToReturn = await serviceManager.UrlService.CreateUrlForUserAsync(userId, urlForCreationDto);
 
@@ -71,7 +70,7 @@ namespace UrlShortenerWebApi.Controllers
         [Authorize(Roles = RolesString.User)]
         public async Task<IActionResult> DeleteUrlAsync(int id)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
             await serviceManager.UrlService.DeleteUrlAsync(userId, id, false);
 
@@ -87,7 +86,7 @@ namespace UrlShortenerWebApi.Controllers
                 return BadRequest("UrlForUpdateDto object is null");
             }
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
             await serviceManager.UrlService.UpdateUrlAsync(userId, id, updateDto, trackChangesForUpdate: true);
 

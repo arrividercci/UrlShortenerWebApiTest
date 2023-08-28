@@ -18,6 +18,5 @@ namespace Entities.Models
         public DateTime CreationDate { get; set; }
         [Required(ErrorMessage = "UserId is requered field.")]
         public string? UserId { get; set; }
-        public User? User { get; set; }
     }
 }
